@@ -422,7 +422,7 @@ page-break-after: avoid;
 <div class="abstract">
 <div class="abstract-title">Abstract</div>
 <p>A short commentary on the Markdown template for reports and books
-that can be compiled to html, epub and pdf using the <a href="https://pandoc.org">Pandoc</a> universal text converter.</p>
+that can be compiled to HTML, EPUB and PDF using the <a href="https://pandoc.org">Pandoc</a> universal text converter.</p>
 </div>
 </header>
 <nav id="TOC" role="doc-toc">
@@ -446,19 +446,19 @@ Inserting and cross-referencing figures, formulas and tables</a>
 <h1 id="introduction">1 Introduction</h1>
 <h4 id="quickstart">Quickstart:</h4>
 <ul>
-<li><code>make</code> — to produce HTML;</li>
-<li><code>make demo.epub</code> — to produce EPUB;</li>
-<li><code>make demo.pdf</code> — to produce PDF;</li>
-<li><code>make all</code> — to produce all three outputs.</li>
+<li><code>$ make</code> — to produce HTML;</li>
+<li><code>$ make demo.epub</code> — to produce EPUB;</li>
+<li><code>$ make demo.pdf</code> — to produce PDF;</li>
+<li><code>$ make all</code> — to produce all three outputs.</li>
 </ul>
 <h4 id="additional-requirements-besides-pandoc">Additional requirements
 besides Pandoc:</h4>
 <ul>
-<li><a href="https://github.com/lierdakil/pandoc-crossref">pandoc-crossref</a>
+<li><a href="https://github.com/lierdakil/pandoc-crossref">pandoc-crossref</a>,
 filter for numbering and cross-referencing figures, tables and
 equations;</li>
-<li><a href="https://github.com/jgm/citeproc">citeproc</a> extension for
-bibliography generation;</li>
+<li><a href="https://github.com/jgm/citeproc">citeproc</a>, extension
+for bibliography generation;</li>
 <li>For PDF generation:
 <ul>
 <li>a LaTeX system with XeTeX engine;</li>
@@ -550,17 +550,16 @@ like “(eq. 1)” rather than just “(1)”.</p>
 rendering engines, most prominent of them are <a href="https://www.mathjax.org/">MathJax</a> and <a href="https://www.w3.org/TR/MathML/">MathML</a>. Most web-browsers
 support both, but your average epub-reader supports only MathML. Thus,
 when converting to EPUB, the “<code>--mathml</code>” option is
-<em>always</em> recommended. It is also the default option for HTML
-conversion, it can be changed to other value (see
+<em>always</em> recommended. This is also the default option for HTML
+conversion and it can be changed to other value (see
 “<code>HTML_MATH</code>” line in <code>settings.mk</code>):</p>
 <pre class="console"><code>$ make HTML_MATH=--mathjax</code></pre>
-<p>That will produce a HTML document that renders equations via
+<p>This will produce a HTML document that renders equations via
 MathJax.</p>
 <blockquote>
-<p><strong>Another consideration</strong> when choosing the math
-rendering option: a web-page that displays MathML is completely
-self-contained, while MathJax by default relies heavily on external
-web.</p>
+<p><strong>Another consideration</strong> when choosing a math rendering
+option: a web-page that displays MathML is completely self-contained,
+while MathJax by default relies heavily on external web.</p>
 </blockquote>
 <h3 id="tables">1.3.3 Tables</h3>
 <p>A detailed description of syntaxes for tables of various types is
