@@ -446,9 +446,9 @@ Inserting and cross-referencing figures, formulas and tables</a>
 <h1 id="introduction">1 Introduction</h1>
 <h4 id="quickstart">Quickstart:</h4>
 <ul>
-<li><code>make</code> — to produce html;</li>
-<li><code>make demo.epub</code> — to produce epub;</li>
-<li><code>make demo.pdf</code> — to produce pdf;</li>
+<li><code>make</code> — to produce HTML;</li>
+<li><code>make demo.epub</code> — to produce EPUB;</li>
+<li><code>make demo.pdf</code> — to produce PDF;</li>
 <li><code>make all</code> — to produce all three outputs.</li>
 </ul>
 <h4 id="additional-requirements-besides-pandoc">Additional requirements
@@ -459,7 +459,7 @@ filter for numbering and cross-referencing figures, tables and
 equations;</li>
 <li><a href="https://github.com/jgm/citeproc">citeproc</a> extension for
 bibliography generation;</li>
-<li>For pdf generation:
+<li>For PDF generation:
 <ul>
 <li>a LaTeX system with XeTeX engine;</li>
 <li><a href="https://github.com/liberationfonts/liberation-fonts/">Liberation
@@ -470,19 +470,20 @@ fonts</a>;</li>
 <h2 id="document-metadata">1.1 Document metadata</h2>
 <p>All document metadata (title, author, etc.) together with style and
 localization are specified through the YAML file —
-<code>report.yaml</code>. Some options are only relevant for pdf
-generated via XeLaTeX backend (“<code>fontsize</code>”,
-“<code>papersize</code>”, the whole “<code>header-includes</code>”
-block), others have impact on the resulting document regardless of
-format. See comments in the file.</p>
+<code>demo.yaml</code>. Some options are only relevant for PDF generated
+via XeLaTeX backend (“<code>fontsize</code>”, “<code>papersize</code>”,
+the whole “<code>header-includes</code>” block), others have impact on
+the resulting document regardless of format. See comments in the
+file.</p>
 <h2 id="citations">1.2 Citations</h2>
-<p>All bibliographical sources are listed in the example of bibliography
-database (<code>demo.bib</code>) in BibTeX format. Resolving the sources
-and rendering citations for resulting bibliography list is done via <a href="https://github.com/jgm/citeproc">citeproc</a> extension library.
-This document uses American Physical Society citation style specified
-through the (<a href="https://docs.citationstyles.org/">CSL</a>) file <a href="https://www.zotero.org/styles/american-physics-society">american-physics-society.csl</a>
-(see “<code>FILTERS</code>” line in <code>pandoc-options.mk</code>). You
-may want to try some other styles listed <a href="https://www.zotero.org/styles">here</a>.</p>
+<p>Bibliographical sources are listed in the example of bibliography
+database (<code>demo.bib</code>) in BibTeX format. Citations and
+bibliography list are produced via <a href="https://github.com/jgm/citeproc">citeproc</a> extension library.
+The document uses American Physical Society citation style which is
+specified through a <a href="https://docs.citationstyles.org/">CSL</a>
+file <a href="https://www.zotero.org/styles/american-physics-society">american-physics-society.csl</a>
+(see “<code>FILTERS</code>” line in <code>settings.mk</code>). You may
+want to try some other styles listed <a href="https://www.zotero.org/styles">here</a>.</p>
 <p>There are a few quirks when using a BibTeX database with citeproc due
 to certain limitations of CSL, see comments in <code>demo.bib</code>.
 Citations are produced by inserting source labels
@@ -498,10 +499,9 @@ out.</p>
 <h2 id="inserting-and-cross-referencing-figures-formulas-and-tables">1.3
 Inserting and cross-referencing figures, formulas and tables</h2>
 <p>Numbering and cross-referencing is done via <a href="https://github.com/lierdakil/pandoc-crossref">pandoc-crossref</a>
-filter, see “<code>FILTERS</code>” line in
-<code>pandoc-options.mk</code>.</p>
+filter, see “<code>FILTERS</code>” line in <code>settings.mk</code>.</p>
 <h3 id="figures">1.3.1 Figures</h3>
-<p>Figures are inserted using a standard Pandoc syntax, image scale is
+<p>Figures are inserted with a standard Pandoc syntax, image scale is
 specified inside curly brackets together with figure label:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure caption](path-to image)</span>{ width=98% #fig:1 }</span></code></pre></div>
 <figure id="fig:1">
@@ -516,8 +516,8 @@ atmospheric layers in two models. Fig. 1 from paper <span class="citation" data
 </figure>
 <blockquote>
 <p><strong>Note</strong> that image scale specification must be
-space-separated from opening and closing brackets (though figure label
-by itself does not require that).</p>
+space-separated from opening and closing brackets, though a figure label
+by itself does not need that.</p>
 </blockquote>
 <p>The “<code>#fig:</code>” is a part of the figure label syntax and is
 mandatory. In-text reference to a figure is produced by inserting its
@@ -540,32 +540,41 @@ the equation label syntax. In-text reference to equation is produced by
 inserting its label as “<code>([-@eq:energy])</code>”: behold the
 reference to equation (1).</p>
 <blockquote>
-<p><strong>Note</strong> the “minus” character before “at” sign in
-reference: it suppresses insertion of <em>equation prefix</em>
+<p><strong>Note</strong> the “minus” character before “at” sign in the
+reference code: it suppresses insertion of <em>equation prefix</em>
 (“<code>eqnPrefix</code>” which is set to “<code>eq.</code> ” by
-default); i.e. without minus the resulting reference would look like
-“(eq. 1)” rather than just “(1)”.</p>
+default); i.e. without this minus the resulting reference would look
+like “(eq. 1)” rather than just “(1)”.</p>
 </blockquote>
-<p>Pandoc can covert TeX-math to code intended for several math
+<p>Pandoc can covert TeX-math to codes intended for several math
 rendering engines, most prominent of them are <a href="https://www.mathjax.org/">MathJax</a> and <a href="https://www.w3.org/TR/MathML/">MathML</a>. Most web-browsers
-support both, but only MathML is well supported in the majority of
-epub-readers. Thus, when converting to epub, the “<code>--mathml</code>”
-option is <em>always</em> recommended. It is also the default for html
-conversion, it can be changed — see “<code>HTML_MATH</code>” line in
-<code>pandoc-options.mk</code>.</p>
+support both, but your average epub-reader supports only MathML. Thus,
+when converting to EPUB, the “<code>--mathml</code>” option is
+<em>always</em> recommended. It is also the default option for HTML
+conversion, it can be changed to other value (see
+“<code>HTML_MATH</code>” line in <code>settings.mk</code>):</p>
+<pre class="console"><code>$ make HTML_MATH=--mathjax</code></pre>
+<p>That will produce a HTML document that renders equations via
+MathJax.</p>
+<blockquote>
+<p><strong>Another consideration</strong> when choosing the math
+rendering option: a web-page that displays MathML is completely
+self-contained, while MathJax by default relies heavily on external
+web.</p>
+</blockquote>
 <h3 id="tables">1.3.3 Tables</h3>
 <p>A detailed description of syntaxes for tables of various types is
 given in <span class="citation" data-cites="Pandoc"> [<a href="#ref-Pandoc" role="doc-biblioref">6</a>]</span>, section <a href="https://pandoc.org/chunkedhtml-demo/8.9-tables.html">8.9</a>. Here
 we use the <em>pipe table</em> syntax:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource md numberLines"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">|</span> Right <span class="pp">|</span> Left <span class="pp">|</span> Default <span class="pp">|</span> Center <span class="pp">|</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="pp">|------:|:-----|---------|:------:|</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="pp">|</span>   12  <span class="pp">|</span>  12  <span class="pp">|</span>    12   <span class="pp">|</span>    12  <span class="pp">|</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="pp">|</span>  123  <span class="pp">|</span>  123 <span class="pp">|</span>   123   <span class="pp">|</span>   123  <span class="pp">|</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="pp">|</span>    1  <span class="pp">|</span>    1 <span class="pp">|</span>     1   <span class="pp">|</span>     1  <span class="pp">|</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a> : Demonstration of pipe table syntax, example</span>
-<span id="cb3-8"><a href="#cb3-8"></a>   <span class="co">[</span><span class="ot">8.9.5</span><span class="co">](https://pandoc.org/chunkedhtml-demo/8.9-tables.html)</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>   by MacFarlane\ <span class="co">[</span><span class="ot">@Pandoc</span><span class="co">]</span>. {#tbl:table_example}</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource md numberLines"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">|</span> Right <span class="pp">|</span> Left <span class="pp">|</span> Default <span class="pp">|</span> Center <span class="pp">|</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="pp">|------:|:-----|---------|:------:|</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="pp">|</span>   12  <span class="pp">|</span>  12  <span class="pp">|</span>    12   <span class="pp">|</span>    12  <span class="pp">|</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="pp">|</span>  123  <span class="pp">|</span>  123 <span class="pp">|</span>   123   <span class="pp">|</span>   123  <span class="pp">|</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="pp">|</span>    1  <span class="pp">|</span>    1 <span class="pp">|</span>     1   <span class="pp">|</span>     1  <span class="pp">|</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a> : Demonstration of pipe table syntax, example</span>
+<span id="cb4-8"><a href="#cb4-8"></a>   <span class="co">[</span><span class="ot">8.9.5</span><span class="co">](https://pandoc.org/chunkedhtml-demo/8.9-tables.html)</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>   by MacFarlane\ <span class="co">[</span><span class="ot">@Pandoc</span><span class="co">]</span>. {#tbl:table_example}</span></code></pre></div>
 <div id="tbl:table_example">
 <table>
 <caption>Table 1: Demonstration of pipe table syntax, example <a href="https://pandoc.org/chunkedhtml-demo/8.9-tables.html">8.9.5</a> by
