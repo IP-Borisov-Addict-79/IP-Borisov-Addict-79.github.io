@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lirika</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">
+
+html {
+font-size: 100%;
+overflow-y: scroll;
+text-align: justify;
+-webkit-text-size-adjust: 100%;
+-ms-text-size-adjust: 100%;
+}
+body {
+color: #444;
+font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+font-size: 12px;
+line-height: 1.7;
+padding: 1em;
+margin: auto;
+max-width: 42em;
+background: #fefefe;
+hyphens: auto;
+}
+a {
+color: #0645ad;
+text-decoration: none;
+}
+a:visited {
+color: #0b0080;
+}
+a:hover {
+color: #06e;
+}
+a:active {
+color: #faa700;
+}
+a:focus {
+outline: thin dotted;
+}
+*::-moz-selection {
+background: rgba(255, 255, 0, 0.3);
+color: #000;
+}
+*::selection {
+background: rgba(255, 255, 0, 0.3);
+color: #000;
+}
+a::-moz-selection {
+background: rgba(255, 255, 0, 0.3);
+color: #0645ad;
+}
+a::selection {
+background: rgba(255, 255, 0, 0.3);
+color: #0645ad;
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+color: #111;
+line-height: 125%;
+margin-top: 2em;
+font-weight: normal;
+}
+h4, h5, h6 {
+font-weight: bold;
+}
+h1 {
+font-size: 2.5em;
+}
+h2 {
+font-size: 2em;
+}
+h3 {
+font-size: 1.5em;
+}
+h4 {
+font-size: 1.2em;
+}
+h5 {
+font-size: 1em;
+}
+h6 {
+font-size: 0.9em;
+}
+blockquote {
+color: #666666;
+margin: 0;
+padding-left: 3em;
+border-left: 0.5em #EEE solid;
+}
+hr {
+display: block;
+height: 2px;
+border: 0;
+border-top: 1px solid #aaa;
+border-bottom: 1px solid #eee;
+margin: 1em 0;
+padding: 0;
+}
+pre, code, kbd, samp {
+color: #000;
+font-family: monospace, monospace;
+_font-family: 'courier new', monospace;
+
+font-size: 85%;
+}
+pre {
+padding: 0.5rem 0.7rem;
+border-radius: 4px;
+background-color: rgb(240, 240, 240);
+white-space: pre;
+white-space: pre-wrap;
+word-wrap: break-word;
+}
+b, strong {
+font-weight: bold;
+}
+dfn {
+font-style: italic;
+}
+ins {
+background: #ff9;
+color: #000;
+text-decoration: none;
+}
+mark {
+background: #ff0;
+color: #000;
+font-style: italic;
+font-weight: bold;
+}
+sub, sup {
+font-size: 75%;
+line-height: 0;
+position: relative;
+vertical-align: baseline;
+}
+sup {
+top: -0.5em;
+}
+sub {
+bottom: -0.25em;
+}
+ul, ol {
+margin: 1em 0;
+padding: 0 0 0 2em;
+}
+li p:last-child {
+margin-bottom: 0;
+}
+ul ul, ol ol {
+margin: .3em 0;
+}
+dl {
+margin-bottom: 1em;
+}
+dt {
+font-weight: bold;
+margin-bottom: .8em;
+}
+dd {
+margin: 0 0 .8em 2em;
+}
+dd:last-child {
+margin-bottom: 0;
+}
+img {
+border: 0;
+-ms-interpolation-mode: bicubic;
+vertical-align: middle;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+figure {
+display: block;
+margin: 1em 0;
+}
+figure img {
+border: none;
+margin: 0 auto;
+}
+figcaption {
+font-style: italic;
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 0.8em;
+}
+table {
+margin-bottom: 2em;
+border-bottom: 1px solid #ddd;
+border-right: 1px solid #ddd;
+border-spacing: 0;
+border-collapse: collapse;
+margin-left: auto;
+margin-right: auto;
+}
+table caption {
+margin-top: 0.8em;
+margin-bottom: 0.8em;
+text-align: center;
+}
+table th {
+padding: .2em 1em;
+background-color: #eee;
+border-top: 1px solid #ddd;
+border-left: 1px solid #ddd;
+}
+table td {
+padding: .2em 1em;
+border-top: 1px solid #ddd;
+border-left: 1px solid #ddd;
+vertical-align: top;
+}
+.author {
+font-size: 1.2em;
+text-align: center;
+}
+.abstract-title {
+text-align: center;
+font-weight: bold;
+}
+.math.inline {
+font-family: 'Latin-Modern';
+}
+.math.display {
+font-family: 'Latin-Modern';
+}
+@media only screen and (min-width: 480px) {
+body {
+font-size: 14px;
+}
+}
+@media only screen and (min-width: 768px) {
+body {
+font-size: 16px;
+}
+}
+@media print {
+* {
+background: transparent !important;
+color: black !important;
+filter: none !important;
+-ms-filter: none !important;
+}
+body {
+font-size: 12pt;
+max-width: 100%;
+}
+a, a:visited {
+text-decoration: underline;
+}
+hr {
+height: 1px;
+border: 0;
+border-bottom: 1px solid black;
+}
+a[href]:after {
+content: " (" attr(href) ")";
+}
+abbr[title]:after {
+content: " (" attr(title) ")";
+}
+.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+content: "";
+}
+pre, blockquote {
+border: 1px solid #999;
+padding-right: 1em;
+page-break-inside: avoid;
+}
+tr, img {
+page-break-inside: avoid;
+}
+img {
+max-width: 100% !important;
+}
+@page :left {
+margin: 15mm 20mm 15mm 10mm;
+}
+@page :right {
+margin: 15mm 10mm 15mm 20mm;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3 {
+page-break-after: avoid;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="любовная-лирика-а.-с.-пушкина">Любовная лирика А. С.
+Пушкина</h1>
+<p>Стихи А. С. Пушкина, посвященные любви, очень многогранны. В них он
+выражает и восхищение, и нежность и горечь расставания. Он представляет
+любовь не только как светлое и возвышенное чувство, но и как
+изнурительное переживание. Его произведения раскрывают внутренний мир
+лирического героя и показывают, как любовь может приводить к глубоким
+переменам в человеке, заставляя его иначе смотреть и на мир, и на себя
+самого.</p>
+<p>Примером тому может служить стихотворение “Я помню чудное мгновенье”.
+В нем автор передаёт трепет и вдохновение, возникающее в душе
+влюблённого. Но вчитавшись, мы обнаруживаем, что, кроме “чудного
+мгновенья”, в жизни есть годы (“шли годы”) и дни (“Тянулись тихо дни
+мои”), лишенные любви:</p>
+<blockquote>
+<p>В глуши во мраке заточенья</p>
+<p>Тянулись тихо дни мои</p>
+<p>Без божества, без вдохновенья,</p>
+<p>Без слез, без жизни, без любви…</p>
+</blockquote>
+<p>Жизнь без любви для Пушкина - жизнь “без жизни”, человек живет не в
+эти тягучие мрачные дни и годы, а в те краткие мгновенья, когда к нему
+возвращается любовь. Любовь приходит и уходит не одна, а вместе с
+другими высшими ценностями жизни. Для Пушкина любовь - огромная
+ценность, ему важнее наличие собственного, чем ответного чувства. Его
+меньше страшит неразделенная любовь, чем лишенное любви
+существование.</p>
+<p>Важно, что Пушкин во всех отношениях берет ответственность на себя.
+Он никогда не винит в своих проблемах людей или обстоятельства. Согласно
+Пушкину, только высокое напряжение духовной жизни позволяет человеку
+встретиться с любовью, в свою очередь поддерживающей огонь души, не
+дающей ей омертветь.</p>
+<p>Любовная лирика Пушкина имеет важное социальное значение. Обращаясь к
+теме любви, он затрагивает вопросы человеческой свободы, личностного
+выбора и ответственности. Они придают его стихам глубину и
+многозначность, делая их актуальными и для современных читателей.</p>
+<p>Таким образом, любовная лирика Александра Сергеевича Пушкина сочетают
+в себе эмоциональный посыл и художественное мастерство. Его произведения
+напоминают нам о том, что любовь - это светлейшее и важное чувство.</p>
+</body>
+</html>
